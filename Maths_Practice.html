@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maths Practice ⭐</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #6EC6F5;
+    --sun: #FFD93D;
+    --green: #6BCB77;
+    --red: #FF6B6B;
+    --purple: #A855F7;
+    --orange: #FF9F43;
+    --white: #FFFDF7;
+    --dark: #2D2D2D;
+    --card: #FFFFFF;
+    --shadow: 0 4px 0px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 0px rgba(0,0,0,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(160deg, #B8E4FF 0%, #E0F7FA 40%, #FFF9E6 100%);
+    min-height: 100vh;
+    padding: 20px 16px 40px;
+  }
+
+  body::before {
+    content: '⭐ 🌟 ✨ ⭐ 🌟 ✨ ⭐ 🌟';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    font-size: 24px;
+    letter-spacing: 60px;
+    opacity: 0.12;
+    pointer-events: none;
+    animation: drift 20s linear infinite;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @keyframes drift {
+    from { transform: translateX(0); }
+    to { transform: translateX(-200px); }
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--dark);
+    text-shadow: 3px 3px 0px var(--sun), 5px 5px 0px rgba(0,0,0,0.1);
+    letter-spacing: 1px;
+    line-height: 1.1;
+  }
+
+  .header p {
+    font-size: 1.05rem;
+    color: #555;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  .score-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background: var(--card);
+    border-radius: 20px;
+    padding: 14px 24px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid var(--sun);
+  }
+
+  .score-display {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: var(--dark);
+  }
+
+  .score-display span {
+    color: var(--purple);
+    font-size: 2rem;
+  }
+
+  .stars-display {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    min-width: 120px;
+  }
+
+  .btn-new {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    background: linear-gradient(135deg, #FF9F43, #FF6B6B);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 28px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #c0392b, 0 7px 10px rgba(0,0,0,0.15);
+    transition: transform 0.1s, box-shadow 0.1s;
+    letter-spacing: 0.5px;
+  }
+
+  .btn-new:hover { transform: translateY(-2px); box-shadow: 0 7px 0 #c0392b, 0 9px 12px rgba(0,0,0,0.15); }
+  .btn-new:active { transform: translateY(3px); box-shadow: 0 2px 0 #c0392b; }
+
+  .table-wrap {
+    background: var(--card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid #E0E0E0;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  thead tr {
+    background: linear-gradient(135deg, #667EEA, #764BA2);
+    color: white;
+  }
+
+  thead th {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 14px 8px;
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+
+  thead th:first-child { width: 44px; }
+
+  tbody tr {
+    border-bottom: 2px solid #F0F0F0;
+    transition: background 0.2s;
+  }
+
+  tbody tr:nth-child(even) { background: #FAFBFF; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #F0F4FF; }
+
+  td {
+    padding: 10px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .row-num {
+    font-family: 'Fredoka One', cursive;
+    color: #BBBBC8;
+    font-size: 0.95rem;
+    width: 36px;
+  }
+
+  .num-cell {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: #333;
+    min-width: 52px;
+  }
+
+  .op-cell {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--purple);
+    width: 28px;
+  }
+
+  .answer-input {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    width: 80px;
+    text-align: center;
+    border: 3px solid #D0D0D0;
+    border-radius: 12px;
+    padding: 6px 4px;
+    background: #FFFBF0;
+    color: #333;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    -moz-appearance: textfield;
+  }
+
+  .answer-input::-webkit-outer-spin-button,
+  .answer-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .answer-input:focus {
+    border-color: var(--purple);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
+  }
+
+  .answer-input.correct {
+    border-color: var(--green);
+    background: #E8FFF0;
+    color: #1a7a1a;
+    animation: pop 0.3s ease;
+  }
+
+  .answer-input.wrong {
+    border-color: var(--red);
+    background: #FFF0F0;
+    color: #cc0000;
+    animation: shake 0.4s ease;
+  }
+
+  @keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20%      { transform: translateX(-6px); }
+    40%      { transform: translateX(6px); }
+    60%      { transform: translateX(-4px); }
+    80%      { transform: translateX(4px); }
+  }
+
+  .result-badge {
+    display: inline-block;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 50px;
+    min-width: 90px;
+    transition: all 0.25s;
+  }
+
+  .result-badge.empty   { background: transparent; color: transparent; }
+  .result-badge.correct { background: var(--green); color: white; box-shadow: 0 3px 0 #3a9e4a; }
+  .result-badge.wrong   { background: var(--red);   color: white; box-shadow: 0 3px 0 #cc3333; }
+
+  .celebration {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .celebration.show { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .celebration-msg {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    color: var(--dark);
+    background: var(--sun);
+    border-radius: 16px;
+    padding: 16px 24px;
+    display: inline-block;
+    box-shadow: var(--shadow-lg);
+    border: 3px solid #e6b800;
+  }
+
+  .confetti-piece {
+    position: fixed;
+    width: 10px; height: 10px;
+    top: -20px;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  @keyframes confettiFall {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg) scale(0.5); opacity: 0; }
+  }
+
+  @media (max-width: 520px) {
+    .num-cell { font-size: 1.2rem; min-width: 38px; }
+    .answer-input { width: 64px; font-size: 1.2rem; }
+    .result-badge { font-size: 0.8rem; min-width: 70px; padding: 3px 8px; }
+    .score-bar { flex-wrap: wrap; gap: 10px; }
+    thead th { font-size: 0.85rem; padding: 12px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🔢 Maths Practice! 🔢</h1>
+    <p>Type your answer and press Enter — can you get them all right?</p>
+  </div>
+
+  <div class="score-bar">
+    <div class="score-display">Score: <span id="scoreNum">0</span> / <span id="totalNum">15</span></div>
+    <div class="stars-display" id="starsDisplay">⬜⬜⬜⬜⬜</div>
+    <button class="btn-new" onclick="newQuestions()">🔄 New Questions!</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="mathTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Number 1</th>
+          <th></th>
+          <th>Number 2</th>
+          <th>=</th>
+          <th>Your Answer</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+
+  <div class="celebration" id="celebration">
+    <div class="celebration-msg" id="celebrationMsg"></div>
+  </div>
+</div>
+
+<script>
+  const NUM_ROWS = 15;
+  let questions = [];
+
+  function randInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function generateQuestion() {
+    let a, b;
+    do {
+      a = randInt(1, 60);
+      b = randInt(1, 60);
+    } while (a + b >= 100);
+    return { a, b, answer: a + b };
+  }
+
+  function buildTable() {
+    questions = Array.from({ length: NUM_ROWS }, generateQuestion);
+    const tbody = document.getElementById('tableBody');
+    tbody.innerHTML = '';
+
+    questions.forEach((q, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="row-num">${i + 1}</td>
+        <td class="num-cell" id="a${i}">${q.a}</td>
+        <td class="op-cell">+</td>
+        <td class="num-cell" id="b${i}">${q.b}</td>
+        <td class="op-cell">=</td>
+        <td>
+          <input
+            class="answer-input"
+            id="ans${i}"
+            type="number"
+            min="0" max="99"
+            placeholder="?"
+            autocomplete="off"
+            oninput="checkAnswer(${i})"
+            onkeydown="handleKey(event, ${i})"
+          >
+        </td>
+        <td><span class="result-badge empty" id="res${i}">-</span></td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    updateScore();
+    document.getElementById('celebration').classList.remove('show');
+    setTimeout(() => document.getElementById('ans0')?.focus(), 100);
+  }
+
+  function checkAnswer(i) {
+    const input = document.getElementById(`ans${i}`);
+    const badge = document.getElementById(`res${i}`);
+    const val = input.value.trim();
+
+    if (val === '') {
+      input.className = 'answer-input';
+      badge.className = 'result-badge empty';
+      badge.textContent = '';
+      updateScore();
+      return;
+    }
+
+    const num = parseInt(val, 10);
+    const correct = questions[i].answer;
+
+    if (num === correct) {
+      input.className = 'answer-input correct';
+      badge.className = 'result-badge correct';
+      badge.textContent = '✔ Correct!';
+    } else {
+      input.className = 'answer-input wrong';
+      badge.className = 'result-badge wrong';
+      badge.textContent = '✘ Try again';
+    }
+
+    updateScore();
+  }
+
+  function handleKey(e, i) {
+    if (e.key === 'Enter') {
+      const next = document.getElementById(`ans${i + 1}`);
+      if (next) next.focus();
+    }
+  }
+
+  function updateScore() {
+    let correct = 0;
+    let answered = 0;
+
+    questions.forEach((q, i) => {
+      const input = document.getElementById(`ans${i}`);
+      if (!input) return;
+      const val = input.value.trim();
+      if (val !== '') {
+        answered++;
+        if (parseInt(val, 10) === q.answer) correct++;
+      }
+    });
+
+    document.getElementById('scoreNum').textContent = correct;
+
+    const stars = Math.min(5, Math.floor(correct / 3));
+    const starStr = '⭐'.repeat(stars) + '⬜'.repeat(5 - stars);
+    document.getElementById('starsDisplay').textContent = starStr;
+
+    if (answered === NUM_ROWS && correct === NUM_ROWS) {
+      showCelebration(correct);
+    } else if (answered === NUM_ROWS) {
+      showCelebration(correct);
+    }
+  }
+
+  function showCelebration(score) {
+    const cel = document.getElementById('celebration');
+    const msg = document.getElementById('celebrationMsg');
+
+    let text;
+    if (score === NUM_ROWS) {
+      text = `🎉 AMAZING! Perfect score — ${score} out of ${NUM_ROWS}! You're a Maths Star! 🌟`;
+      launchConfetti(60);
+    } else if (score >= 12) {
+      text = `🌟 Brilliant! ${score} out of ${NUM_ROWS}! Nearly perfect!`;
+      launchConfetti(30);
+    } else if (score >= 9) {
+      text = `👍 Great job! ${score} out of ${NUM_ROWS}! Keep practising!`;
+    } else {
+      text = `💪 ${score} out of ${NUM_ROWS} — don't give up, try again!`;
+    }
+
+    msg.textContent = text;
+    cel.classList.add('show');
+    cel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function launchConfetti(count) {
+    const colors = ['#FFD93D','#6BCB77','#6EC6F5','#FF6B6B','#A855F7','#FF9F43','#FFF'];
+    for (let i = 0; i < count; i++) {
+      setTimeout(() => {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.width = (8 + Math.random() * 8) + 'px';
+        piece.style.height = (8 + Math.random() * 8) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.5) + 's';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 5000);
+      }, i * 30);
+    }
+  }
+
+  function newQuestions() {
+    buildTable();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  buildTable();
+</script>
+</body>
+</html>
