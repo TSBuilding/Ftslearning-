@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Crows Cash 🏈</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #002B5C;
+    --red:    #CE1126;
+    --gold:   #FFB81C;
+    --dark:   #001a38;
+    --white:  #F8F9FA;
+    --green:  #2DC653;
+    --wrong:  #E63946;
+    --card:   rgba(255,255,255,0.07);
+    --border: rgba(255,255,255,0.13);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; overflow-x: hidden; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--navy);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  .bg-layer { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+  .bg-layer::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,184,28,0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .bg-layer::after {
+    content: '';
+    position: absolute; inset: -100%;
+    background: repeating-linear-gradient(55deg, transparent, transparent 50px, rgba(206,17,38,0.03) 50px, rgba(206,17,38,0.03) 100px);
+    animation: slideBg 40s linear infinite;
+  }
+  @keyframes slideBg { from { transform: translateX(0); } to { transform: translateX(200px); } }
+
+  .floater { position: fixed; font-size: 2rem; opacity: 0.06; pointer-events: none; animation: floatUp linear infinite; z-index: 0; }
+  @keyframes floatUp { 0% { transform: translateY(110vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.06; } 90% { opacity: 0.06; } 100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; } }
+
+  .page { position: relative; z-index: 1; min-height: 100vh; padding: 20px 16px 48px; max-width: 680px; margin: 0 auto; }
+
+  .btn-back { font-family: 'Bangers', cursive; font-size: 1rem; letter-spacing: 2px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 2px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 8px 20px; cursor: pointer; transition: all 0.15s; text-decoration: none; margin-bottom: 14px; display: block; width: fit-content; }
+  .btn-back:hover { background: rgba(255,255,255,0.14); color: white; }
+
+  .header { text-align: center; margin-bottom: 20px; animation: dropIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+  @keyframes dropIn { from { transform: translateY(-50px) scale(0.85); opacity: 0; } to { transform: translateY(0) scale(1); opacity: 1; } }
+
+  .crows-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: linear-gradient(135deg, var(--red), #a00d1e);
+    border: 3px solid var(--gold);
+    border-radius: 16px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3), 0 0 30px rgba(206,17,38,0.3);
+  }
+  .crows-badge span { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--gold); letter-spacing: 2px; }
+
+  .header h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    color: var(--gold);
+    letter-spacing: 3px; line-height: 1;
+    text-shadow: 3px 3px 0 var(--red), 6px 6px 0 rgba(0,0,0,0.4);
+  }
+  .header p { color: rgba(255,255,255,0.6); font-weight: 700; font-size: 0.88rem; margin-top: 6px; letter-spacing: 1px; }
+
+  .wallet-bar {
+    display: flex; align-items: center; gap: 12px;
+    background: linear-gradient(135deg, rgba(255,184,28,0.12), rgba(255,184,28,0.06));
+    border: 2px solid rgba(255,184,28,0.35);
+    border-radius: 18px; padding: 12px 18px;
+    margin-bottom: 16px;
+  }
+  .wallet-icon { font-size: 2rem; }
+  .wallet-label { font-family: 'Bangers', cursive; font-size: 0.9rem; color: rgba(255,184,28,0.7); letter-spacing: 2px; }
+  .wallet-amount { font-family: 'Bangers', cursive; font-size: 2.2rem; color: var(--gold); text-shadow: 2px 2px 0 rgba(0,0,0,0.3); letter-spacing: 1px; }
+  .wallet-coins { display: flex; flex-wrap: wrap; gap: 5px; flex: 1; justify-content: flex-end; }
+  .coin-tag { font-family: 'Bangers', cursive; font-size: 0.78rem; background: rgba(255,184,28,0.15); border: 1px solid rgba(255,184,28,0.3); color: var(--gold); border-radius: 50px; padding: 2px 8px; letter-spacing: 1px; }
+
+  .phase-header { text-align: center; margin-bottom: 14px; }
+  .phase-num { font-family: 'Bangers', cursive; font-size: 0.85rem; color: rgba(255,255,255,0.35); letter-spacing: 3px; }
+  .phase-title { font-family: 'Bangers', cursive; font-size: clamp(1.5rem, 5vw, 2.2rem); color: white; letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,0.3); margin-top: 2px; }
+
+  .card { background: var(--card); border: 2px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 14px; }
+
+  .chore-grid { display: flex; flex-direction: column; gap: 10px; }
+
+  .chore-item {
+    display: flex; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 14px; padding: 12px 16px;
+    cursor: pointer; transition: all 0.2s;
+    -webkit-user-select: none; user-select: none;
+  }
+  .chore-item:hover { background: rgba(255,255,255,0.09); }
+  .chore-item.selected {
+    background: rgba(255,184,28,0.15);
+    border-color: rgba(255,184,28,0.5);
+    box-shadow: 0 0 12px rgba(255,184,28,0.2);
+  }
+  .chore-check { width: 28px; height: 28px; border-radius: 8px; border: 2px solid rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: all 0.2s; background: rgba(255,255,255,0.05); }
+  .chore-item.selected .chore-check { background: var(--gold); border-color: var(--gold); }
+  .chore-emoji { font-size: 1.6rem; flex-shrink: 0; }
+  .chore-info { flex: 1; }
+  .chore-name { font-weight: 900; color: white; font-size: 0.95rem; }
+  .chore-value { font-family: 'Bangers', cursive; font-size: 1.1rem; color: var(--gold); letter-spacing: 1px; }
+
+  .earn-total { text-align: center; margin-top: 14px; font-family: 'Bangers', cursive; font-size: 1.1rem; color: rgba(255,184,28,0.7); letter-spacing: 1px; }
+  .earn-total span { color: var(--gold); font-size: 1.5rem; }
+
+  .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+  .shop-item {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 14px 10px;
+    text-align: center; cursor: pointer;
+    transition: all 0.18s;
+    -webkit-user-select: none; user-select: none;
+    position: relative;
+  }
+  .shop-item:hover:not(.sold-out):not(.cant-afford) { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+  .shop-item:active:not(.sold-out):not(.cant-afford) { transform: translateY(1px); }
+  .shop-item.sold-out { opacity: 0.4; cursor: default; }
+  .shop-item.cant-afford { opacity: 0.45; cursor: default; }
+  .shop-item.purchased { border-color: var(--green); background: rgba(45,198,83,0.1); }
+
+  .shop-emoji { font-size: 2.4rem; display: block; margin-bottom: 6px; }
+  .shop-name { font-weight: 900; color: white; font-size: 0.82rem; margin-bottom: 4px; line-height: 1.2; }
+  .shop-price { font-family: 'Bangers', cursive; font-size: 1.3rem; color: var(--gold); letter-spacing: 1px; }
+  .shop-tag { position: absolute; top: 6px; right: 6px; font-size: 0.6rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 2px 6px; border-radius: 50px; }
+  .shop-tag.canteen { background: rgba(206,17,38,0.3); color: #ff8888; border: 1px solid rgba(206,17,38,0.4); }
+  .shop-tag.merch   { background: rgba(0,43,92,0.5);  color: #88aaff; border: 1px solid rgba(0,100,200,0.4); }
+
+  .change-q {
+    background: linear-gradient(135deg, rgba(206,17,38,0.12), rgba(206,17,38,0.06));
+    border: 2px solid rgba(206,17,38,0.3);
+    border-radius: 18px; padding: 18px; margin-bottom: 14px;
+    text-align: center; animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .change-label { font-size: 0.72rem; font-weight: 900; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .change-sum { font-family: 'Bangers', cursive; font-size: clamp(1.3rem, 4vw, 1.8rem); color: white; letter-spacing: 1px; line-height: 1.4; }
+  .change-sum .hi { color: var(--gold); }
+
+  .change-choices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin-bottom: 12px; }
+  .change-btn { font-family: 'Bangers', cursive; font-size: 1.6rem; color: white; background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 2px solid rgba(255,255,255,0.18); border-radius: 14px; padding: 16px 8px; cursor: pointer; letter-spacing: 1px; transition: transform 0.12s, box-shadow 0.12s; box-shadow: 0 5px 0 rgba(0,0,0,0.25); -webkit-user-select: none; user-select: none; }
+  .change-btn:hover:not(:disabled) { transform: translateY(-3px); box-shadow: 0 8px 0 rgba(0,0,0,0.25); }
+  .change-btn:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,0.25); }
+  .change-btn:disabled { cursor: default; }
+  .change-btn.correct { background: linear-gradient(135deg, #2DC653, #1a8a35); border-color: #2DC653; box-shadow: 0 5px 0 #0f5c22; transform: translateY(-3px); }
+  .change-btn.wrong   { background: linear-gradient(135deg, #E63946, #a01f2a); border-color: #E63946; box-shadow: 0 5px 0 #6b1017; }
+  .change-btn.dimmed  { opacity: 0.3; }
+
+  .feedback { font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 1px; min-height: 30px; text-align: center; margin-bottom: 10px; }
+  .feedback.correct { color: var(--green); text-shadow: 0 0 20px rgba(45,198,83,0.5); }
+  .feedback.wrong   { color: var(--wrong); text-shadow: 0 0 20px rgba(230,57,70,0.5); }
+  .feedback.empty   { color: transparent; }
+
+  .btn-primary { font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 2px; background: linear-gradient(135deg, var(--gold), #e6a000); color: var(--dark); border: none; border-radius: 50px; padding: 14px 36px; cursor: pointer; box-shadow: 0 6px 0 #b87800; transition: transform 0.12s, box-shadow 0.12s; display: block; width: 100%; margin-top: 6px; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b87800; }
+  .btn-primary:active { transform: translateY(3px); box-shadow: 0 3px 0 #b87800; }
+  .btn-primary:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+  .btn-red { font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 2px; background: linear-gradient(135deg, var(--red), #a00d1e); color: white; border: none; border-radius: 50px; padding: 14px 36px; cursor: pointer; box-shadow: 0 6px 0 #7a0010; transition: transform 0.12s; display: block; width: 100%; margin-top: 6px; }
+  .btn-red:hover { transform: translateY(-2px); }
+  .btn-red:active { transform: translateY(3px); }
+
+  .btn-home { font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 2px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7); border: 2px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 11px 32px; cursor: pointer; transition: all 0.15s; display: block; width: 100%; text-decoration: none; text-align: center; margin-top: 10px; }
+  .btn-home:hover { background: rgba(255,255,255,0.14); color: white; }
+
+  .summary { display: none; text-align: center; animation: fadeUp 0.5s ease both; }
+  .summary.show { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .summary-trophy { font-size: 5rem; display: block; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  .summary-title { font-family: 'Bangers', cursive; font-size: clamp(2rem, 8vw, 3rem); color: var(--gold); letter-spacing: 3px; text-shadow: 3px 3px 0 var(--red); margin-bottom: 16px; }
+
+  .summary-stats { background: var(--card); border: 2px solid var(--border); border-radius: 18px; padding: 18px; margin-bottom: 16px; text-align: left; }
+  .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { font-weight: 800; color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+  .stat-val { font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--gold); letter-spacing: 1px; }
+  .stat-val.green { color: var(--green); }
+  .stat-val.red   { color: var(--wrong); }
+
+  .purchased-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 10px 0 16px; }
+  .purchased-tag { font-size: 1.6rem; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; padding: 6px 10px; }
+
+  .progress-bar-wrap { margin-bottom: 14px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: 1px; margin-bottom: 4px; }
+  .progress-track { background: rgba(255,255,255,0.08); border-radius: 50px; height: 8px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--red)); border-radius: 50px; transition: width 0.4s ease; }
+
+  @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  .money-pop { position: fixed; pointer-events: none; z-index: 999; font-family: 'Bangers', cursive; font-size: 1.4rem; color: var(--gold); text-shadow: 2px 2px 0 rgba(0,0,0,0.5); animation: moneyFly 1s ease forwards; }
+  @keyframes moneyFly { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-80px) scale(1.3); opacity: 0; } }
+
+  .confetti-piece { position: fixed; top: -20px; border-radius: 2px; animation: confettiFall linear forwards; pointer-events: none; z-index: 999; }
+  @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: 0; } }
+
+  .splash { position: fixed; inset: 0; background: var(--navy); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; animation: splashOut 0.5s ease 2s both; }
+  @keyframes splashOut { to { opacity: 0; pointer-events: none; } }
+  .splash-badge { background: linear-gradient(135deg, var(--red), #a00d1e); border: 3px solid var(--gold); border-radius: 20px; padding: 16px 28px; text-align: center; animation: splashBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both; }
+  .splash-crow { font-size: 4rem; display: block; }
+  .splash-title { font-family: 'Bangers', cursive; font-size: 2.5rem; color: var(--gold); letter-spacing: 3px; text-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
+  .splash-sub { color: rgba(255,255,255,0.6); font-weight: 800; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; animation: splashBounce 0.5s ease 0.8s both; }
+  @keyframes splashBounce { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  @media (max-width: 400px) {
+    .shop-grid { gap: 8px; }
+    .shop-emoji { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="splash">
+  <div class="splash-badge">
+    <span class="splash-crow">🦅</span>
+    <div class="splash-title">CROWS CASH</div>
+  </div>
+  <div class="splash-sub">Earn it. Spend it. Learn it.</div>
+</div>
+
+<div class="bg-layer"></div>
+<div class="floater" style="left:5%;  animation-duration:18s; animation-delay:0s;">🏈</div>
+<div class="floater" style="left:20%; animation-duration:24s; animation-delay:3s;">🦅</div>
+<div class="floater" style="left:42%; animation-duration:16s; animation-delay:7s;">💰</div>
+<div class="floater" style="left:65%; animation-duration:20s; animation-delay:2s;">⭐</div>
+<div class="floater" style="left:85%; animation-duration:14s; animation-delay:5s;">🏆</div>
+
+<div class="page">
+
+  <a class="btn-back" href="index.html">🏠 Back to HQ</a>
+
+  <div class="header">
+    <div class="crows-badge">
+      <span>🦅</span>
+      <span>ADELAIDE CROWS</span>
+      <span>🦅</span>
+    </div>
+    <h1>💰 CROWS CASH 💰</h1>
+    <p>Do your chores, earn your cash, hit the footy shop!</p>
+  </div>
+
+  <div class="wallet-bar" id="walletBar">
+    <div class="wallet-icon">👛</div>
+    <div>
+      <div class="wallet-label">MY WALLET</div>
+      <div class="wallet-amount" id="walletAmount">$0</div>
+    </div>
+    <div class="wallet-coins" id="walletCoins"></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div id="phase1">
+    <div class="phase-header">
+      <div class="phase-num">PHASE 1 OF 3</div>
+      <div class="phase-title">⚒️ Earn Your Cash!</div>
+    </div>
+    <div class="card">
+      <div style="font-weight:800; color:rgba(255,255,255,0.6); font-size:0.82rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px;">
+        Tick everything you've done this week 👇
+      </div>
+      <div class="chore-grid" id="choreGrid"></div>
+      <div class="earn-total">Total earned: <span id="earnTotal">$0</span></div>
+    </div>
+    <button class="btn-primary" id="btnToShop" onclick="goToShop()" disabled>
+      🏈 HEAD TO THE CROWS SHOP!
+    </button>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div id="phase2" style="display:none">
+    <div class="phase-header">
+      <div class="phase-num">PHASE 2 OF 3</div>
+      <div class="phase-title">🏪 The Crows Shop!</div>
+    </div>
+
+    <div class="progress-bar-wrap" id="shopProgress" style="display:none">
+      <div class="progress-label">
+        <span id="progressLabel">Question 1</span>
+        <span id="progressScore">0 correct</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:10px;">
+      <div style="font-weight:800; color:rgba(255,255,255,0.6); font-size:0.82rem; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px;">
+        Tap something to buy! 🛒
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+    </div>
+
+    <div id="changeSection" style="display:none">
+      <div class="change-q" id="changeQ">
+        <div class="change-label">💡 Work out the change!</div>
+        <div class="change-sum" id="changeSumText"></div>
+      </div>
+      <div class="change-choices" id="changeChoices"></div>
+      <div class="feedback empty" id="feedback">-</div>
+    </div>
+
+    <button class="btn-red" id="btnFinish" onclick="goToSummary()" style="display:none">
+      🏆 See My Summary!
+    </button>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="summary" id="phase3">
+    <span class="summary-trophy" id="summaryTrophy">🏆</span>
+    <div class="summary-title" id="summaryTitle">GREAT WORK!</div>
+    <div class="purchased-list" id="purchasedList"></div>
+    <div class="summary-stats" id="summaryStats"></div>
+    <button class="btn-primary" onclick="restartGame()" style="margin-top:4px;">🔄 Play Again!</button>
+    <a class="btn-home" href="index.html">🏠 Back to HQ</a>
+  </div>
+
+</div>
+
+<script>
+const CHORES = [
+  { emoji:'🛏️', name:'Made my bed',              value:1 },
+  { emoji:'🍽️', name:'Helped with the dishes',    value:2 },
+  { emoji:'🧹', name:'Tidied my room',             value:3 },
+  { emoji:'🎒', name:'Unpacked my school bag',     value:1 },
+  { emoji:'⚽', name:'Put the balls away outside', value:1 },
+  { emoji:'🪴', name:'Helped water the plants',    value:2 },
+  { emoji:'🛒', name:'Helped unpack groceries',    value:2 },
+  { emoji:'🧺', name:'Put my clothes away',        value:1 },
+  { emoji:'🚗', name:'Helped wash the car',        value:3 },
+  { emoji:'♻️', name:'Put the bins out',           value:2 },
+];
+
+const SHOP_ITEMS = [
+  { emoji:'🥧', name:'Meat Pie',        price:4,  category:'canteen' },
+  { emoji:'🌭', name:'Hot Dog',         price:3,  category:'canteen' },
+  { emoji:'🍟', name:'Hot Chips',       price:4,  category:'canteen' },
+  { emoji:'🥤', name:'Soft Drink',      price:3,  category:'canteen' },
+  { emoji:'☕', name:'Hot Chocolate',   price:4,  category:'canteen' },
+  { emoji:'🍔', name:'Burger',          price:6,  category:'canteen' },
+  { emoji:'🍕', name:'Pizza Slice',     price:5,  category:'canteen' },
+  { emoji:'🍦', name:'Ice Cream',       price:3,  category:'canteen' },
+  { emoji:'🧢', name:'Crows Cap',       price:15, category:'merch'   },
+  { emoji:'📓', name:'Crows Notebook',  price:8,  category:'merch'   },
+  { emoji:'🖊️', name:'Crows Pen Set',   price:5,  category:'merch'   },
+  { emoji:'🔑', name:'Crows Keyring',   price:4,  category:'merch'   },
+  { emoji:'🧸', name:'Crows Mascot',    price:12, category:'merch'   },
+  { emoji:'📿', name:'Crows Wristband', price:3,  category:'merch'   },
+  { emoji:'🏅', name:'Crows Medal',     price:6,  category:'merch'   },
+  { emoji:'🌂', name:'Crows Umbrella',  price:10, category:'merch'   },
+];
+
+let wallet=0, selectedChores=new Set(), purchasedItems=[], shopItems=[];
+let currentItem=null, changeScore=0, changeTotal=0, changeAnswered=false;
+
+function updateStreak(){
+  const today=new Date().toDateString(),last=localStorage.getItem('lastVisit');
+  let streak=parseInt(localStorage.getItem('streak')||'0');
+  if(last===today){}
+  else if(last===new Date(Date.now()-86400000).toDateString()){streak++;localStorage.setItem('streak',streak);localStorage.setItem('lastVisit',today);}
+  else{streak=1;localStorage.setItem('streak',streak);localStorage.setItem('lastVisit',today);}
+}
+
+function shuffle(a){return[...a].sort(()=>Math.random()-0.5);}
+function fmt(n){return'$'+n;}
+
+function updateWalletUI(){
+  document.getElementById('walletAmount').textContent=fmt(wallet);
+  const coins=document.getElementById('walletCoins');
+  coins.innerHTML='';
+  if(wallet<=0)return;
+  let rem=wallet;
+  [20,10,5,2,1].forEach(d=>{
+    const count=Math.floor(rem/d);
+    if(count>0){
+      rem-=count*d;
+      const tag=document.createElement('div');
+      tag.className='coin-tag';
+      tag.textContent=count>1?`${count}×$${d}`:`$${d}`;
+      coins.appendChild(tag);
+    }
+  });
+}
+
+function initChores(){
+  const grid=document.getElementById('choreGrid');
+  grid.innerHTML='';
+  selectedChores.clear();
+  wallet=0;
+  updateWalletUI();
+  CHORES.forEach((chore,i)=>{
+    const div=document.createElement('div');
+    div.className='chore-item';
+    div.id='chore'+i;
+    div.innerHTML=`
+      <div class="chore-check" id="check${i}"></div>
+      <div class="chore-emoji">${chore.emoji}</div>
+      <div class="chore-info">
+        <div class="chore-name">${chore.name}</div>
+        <div class="chore-value">+${fmt(chore.value)}</div>
+      </div>`;
+    div.onclick=()=>toggleChore(i);
+    grid.appendChild(div);
+  });
+}
+
+function toggleChore(i){
+  const chore=CHORES[i];
+  const div=document.getElementById('chore'+i);
+  const check=document.getElementById('check'+i);
+  if(selectedChores.has(i)){
+    selectedChores.delete(i);
+    div.classList.remove('selected');
+    check.textContent='';
+    wallet-=chore.value;
+  } else {
+    selectedChores.add(i);
+    div.classList.add('selected');
+    check.textContent='✔';
+    wallet+=chore.value;
+    showMoneyPop('+'+fmt(chore.value),div);
+  }
+  document.getElementById('earnTotal').textContent=fmt(wallet);
+  updateWalletUI();
+  document.getElementById('btnToShop').disabled=wallet<=0;
+}
+
+function showMoneyPop(text,el){
+  const rect=el.getBoundingClientRect();
+  const pop=document.createElement('div');
+  pop.className='money-pop';
+  pop.textContent=text;
+  pop.style.left=(rect.right-60)+'px';
+  pop.style.top=(rect.top+window.scrollY-10)+'px';
+  document.body.appendChild(pop);
+  setTimeout(()=>pop.remove(),1000);
+}
+
+function goToShop(){
+  document.getElementById('phase1').style.display='none';
+  document.getElementById('phase2').style.display='block';
+  purchasedItems=[];changeScore=0;changeTotal=0;changeAnswered=false;
+
+  const affordable=SHOP_ITEMS.filter(item=>item.price<=wallet);
+  const canteen=shuffle(affordable.filter(i=>i.category==='canteen')).slice(0,4);
+  const merch=shuffle(affordable.filter(i=>i.category==='merch')).slice(0,4);
+  shopItems=shuffle([...canteen,...merch]);
+  if(shopItems.length===0) shopItems=shuffle(SHOP_ITEMS).slice(0,6);
+
+  renderShop();
+  document.getElementById('changeSection').style.display='none';
+  document.getElementById('btnFinish').style.display='none';
+  document.getElementById('feedback').className='feedback empty';
+  document.getElementById('feedback').textContent='-';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderShop(){
+  const grid=document.getElementById('shopGrid');
+  grid.innerHTML='';
+  shopItems.forEach((item,i)=>{
+    const isPurchased=purchasedItems.some(p=>p.name===item.name);
+    const cantAfford=item.price>wallet;
+    const div=document.createElement('div');
+    div.className='shop-item'+(isPurchased?' purchased':cantAfford?' cant-afford':'');
+    div.innerHTML=`
+      <span class="shop-tag ${item.category}">${item.category==='canteen'?'CANTEEN':'MERCH'}</span>
+      <span class="shop-emoji">${item.emoji}</span>
+      <div class="shop-name">${item.name}</div>
+      <div class="shop-price">${fmt(item.price)}</div>
+      ${isPurchased?'<div style="font-size:0.7rem;color:#2DC653;font-weight:900;margin-top:3px;">✔ BOUGHT!</div>':''}`;
+    if(!isPurchased&&!cantAfford) div.onclick=()=>buyItem(item,i);
+    grid.appendChild(div);
+  });
+}
+
+function buyItem(item){
+  if(item.price>wallet)return;
+  currentItem=item;
+  changeAnswered=false;
+  wallet-=item.price;
+  updateWalletUI();
+  purchasedItems.push(item);
+  renderShop();
+
+  const section=document.getElementById('changeSection');
+  section.style.display='block';
+  section.scrollIntoView({behavior:'smooth',block:'nearest'});
+
+  const paid=nextRoundUp(item.price);
+  const change=paid-item.price;
+  changeTotal++;
+
+  document.getElementById('changeSumText').innerHTML=
+    `You bought <span class="hi">${item.emoji} ${item.name}</span> for <span class="hi">${fmt(item.price)}</span>.<br>`+
+    `You paid with <span class="hi">${fmt(paid)}</span>.<br>`+
+    `How much change do you get back? 💰`;
+
+  const wrongs=generateChangeWrongs(change,paid,item.price);
+  const choices=shuffle([change,...wrongs]);
+  const choicesDiv=document.getElementById('changeChoices');
+  choicesDiv.innerHTML='';
+  choices.forEach(val=>{
+    const btn=document.createElement('button');
+    btn.className='change-btn';
+    btn.textContent=fmt(val);
+    btn.onclick=()=>handleChange(btn,val,change);
+    choicesDiv.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className='feedback empty';
+  document.getElementById('feedback').textContent='-';
+  document.getElementById('shopProgress').style.display='block';
+  updateShopProgress();
+}
+
+function nextRoundUp(price){
+  const options=[1,2,5,10,20,50];
+  for(const o of options){ if(o>price) return o; }
+  return price+1;
+}
+
+function generateChangeWrongs(correct,paid,price){
+  const wrongs=new Set();
+  [correct+1,correct-1,correct+2,correct-2,correct+3,paid,price].forEach(n=>{if(n>0&&n!==correct)wrongs.add(n);});
+  const pool=shuffle([...wrongs].filter(n=>n>0&&n!==correct));
+  const result=[];
+  for(let i=0;i<pool.length&&result.length<3;i++){if(!result.includes(pool[i]))result.push(pool[i]);}
+  while(result.length<3){const r=correct+(result.length+2);if(!result.includes(r)&&r!==correct)result.push(r);}
+  return result.slice(0,3);
+}
+
+function handleChange(btn,chosen,correct){
+  if(changeAnswered)return;
+  changeAnswered=true;
+  const allBtns=document.querySelectorAll('.change-btn');
+  allBtns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById('feedback');
+
+  if(chosen===correct){
+    changeScore++;
+    btn.classList.add('correct');
+    fb.className='feedback correct';
+    fb.textContent=['CORRECT! 🎉','NAILED IT! 💰','SPOT ON! 🏆','MONEY MASTER! ⭐'][Math.floor(Math.random()*4)];
+    launchConfetti(20);
+  } else {
+    btn.classList.add('wrong');
+    fb.className='feedback wrong';
+    fb.textContent=`Not quite! The change was ${fmt(correct)} 💡`;
+    allBtns.forEach(b=>{
+      if(b.textContent===fmt(correct))b.classList.add('correct');
+      else if(b!==btn)b.classList.add('dimmed');
+    });
+  }
+
+  updateShopProgress();
+
+  setTimeout(()=>{
+    const stillAffordable=shopItems.filter(item=>!purchasedItems.some(p=>p.name===item.name)&&item.price<=wallet);
+    if(wallet<=0||stillAffordable.length===0){
+      document.getElementById('btnFinish').style.display='block';
+      document.getElementById('btnFinish').scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    changeAnswered=false;
+  },800);
+}
+
+function updateShopProgress(){
+  document.getElementById('progressLabel').textContent=`Bought: ${purchasedItems.length} item${purchasedItems.length!==1?'s':''}`;
+  document.getElementById('progressScore').textContent=`${changeScore} / ${changeTotal} correct`;
+  const pct=changeTotal>0?(changeScore/changeTotal*100):0;
+  document.getElementById('progressFill').style.width=pct+'%';
+}
+
+function goToSummary(){
+  updateStreak();
+  document.getElementById('phase2').style.display='none';
+  const summary=document.getElementById('phase3');
+  summary.classList.add('show');
+  summary.scrollIntoView({behavior:'smooth',block:'start'});
+
+  const earned=Array.from(selectedChores).reduce((s,i)=>s+CHORES[i].value,0);
+  const spent=purchasedItems.reduce((s,i)=>s+i.price,0);
+  const pct=changeTotal>0?Math.round(changeScore/changeTotal*100):100;
+
+  let trophy,title;
+  if(pct===100&&purchasedItems.length>0){trophy='🏆';title='LEGEND!';launchConfetti(80);}
+  else if(pct>=75){trophy='🌟';title='GREAT WORK!';launchConfetti(40);}
+  else if(pct>=50){trophy='👊';title='GOOD EFFORT!';}
+  else{trophy='💪';title='KEEP GOING!';}
+
+  document.getElementById('summaryTrophy').textContent=trophy;
+  document.getElementById('summaryTitle').textContent=title;
+
+  const list=document.getElementById('purchasedList');
+  list.innerHTML='';
+  if(purchasedItems.length===0){
+    list.innerHTML='<div style="color:rgba(255,255,255,0.4);font-weight:800;font-size:0.85rem;">Nothing bought this time!</div>';
+  } else {
+    purchasedItems.forEach(item=>{
+      const tag=document.createElement('div');
+      tag.className='purchased-tag';
+      tag.title=item.name;
+      tag.textContent=item.emoji;
+      list.appendChild(tag);
+    });
+  }
+
+  document.getElementById('summaryStats').innerHTML=`
+    <div class="stat-row"><span class="stat-label">💪 Chores done</span><span class="stat-val">${selectedChores.size}</span></div>
+    <div class="stat-row"><span class="stat-label">💰 Money earned</span><span class="stat-val green">${fmt(earned)}</span></div>
+    <div class="stat-row"><span class="stat-label">🛒 Money spent</span><span class="stat-val red">${fmt(spent)}</span></div>
+    <div class="stat-row"><span class="stat-label">👛 Money left over</span><span class="stat-val">${fmt(wallet)}</span></div>
+    <div class="stat-row"><span class="stat-label">🧮 Change questions</span><span class="stat-val">${changeScore} / ${changeTotal} correct</span></div>`;
+}
+
+function restartGame(){
+  wallet=0;selectedChores.clear();purchasedItems=[];changeScore=0;changeTotal=0;currentItem=null;
+  document.getElementById('phase3').classList.remove('show');
+  document.getElementById('phase2').style.display='none';
+  document.getElementById('phase1').style.display='block';
+  document.getElementById('changeSection').style.display='none';
+  document.getElementById('btnFinish').style.display='none';
+  document.getElementById('shopProgress').style.display='none';
+  updateWalletUI();
+  initChores();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function launchConfetti(count){
+  const colors=['#FFB81C','#CE1126','#002B5C','#ffffff','#2DC653'];
+  for(let i=0;i<count;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.className='confetti-piece';
+      p.style.left=Math.random()*100+'vw';
+      p.style.background=colors[Math.floor(Math.random()*colors.length)];
+      p.style.width=(8+Math.random()*8)+'px';
+      p.style.height=(8+Math.random()*8)+'px';
+      p.style.borderRadius=Math.random()>0.5?'50%':'2px';
+      p.style.animationDuration=(2+Math.random()*2)+'s';
+      p.style.animationDelay=(Math.random()*0.3)+'s';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),5000);
+    },i*25);
+  }
+}
+
+initChores();
+updateWalletUI();
+</script>
+</body>
+</html>
