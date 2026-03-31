@@ -39,19 +39,42 @@
   .header .subtitle { font-size: 1rem; color: rgba(255,255,255,0.7); font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
   .header .tagline { display: inline-block; margin-top: 12px; background: var(--gold); color: var(--dark); font-size: 0.95rem; font-weight: 900; padding: 6px 20px; border-radius: 50px; letter-spacing: 0.5px; box-shadow: 0 3px 0 #b8960a; }
 
+  /* Bank feature card - full width at top */
+  .bank-card {
+    display: block; text-decoration: none;
+    background: linear-gradient(135deg, #CE1126, #7a0010 50%, #002B5C);
+    border: 3px solid #FFB81C;
+    border-radius: 20px; padding: 20px 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 0 rgba(0,0,0,0.3), 0 0 30px rgba(206,17,38,0.2);
+    transition: transform 0.15s, box-shadow 0.15s;
+    animation: cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+    position: relative; overflow: hidden;
+  }
+  .bank-card::before { content: '🦅'; position: absolute; right: -5px; bottom: -10px; font-size: 6rem; opacity: 0.07; transform: rotate(-10deg); pointer-events: none; }
+  .bank-card:hover { transform: translateY(-3px); box-shadow: 0 12px 0 rgba(0,0,0,0.3); }
+  .bank-card:active { transform: translateY(3px); box-shadow: 0 4px 0 rgba(0,0,0,0.3); }
+  .bank-card-inner { display: flex; align-items: center; gap: 14px; }
+  .bank-card-icon { font-size: 3rem; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3)); flex-shrink: 0; }
+  .bank-card-text {}
+  .bank-card-label { font-size: 0.72rem; font-weight: 900; color: rgba(255,184,28,0.7); letter-spacing: 2px; text-transform: uppercase; }
+  .bank-card-title { font-family: 'Bangers', cursive; font-size: 1.8rem; color: #FFB81C; letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,0.3); line-height: 1; }
+  .bank-card-desc { font-size: 0.82rem; color: rgba(255,255,255,0.65); font-weight: 700; margin-top: 3px; }
+  .bank-new-badge { position: absolute; top: 12px; right: 12px; background: #FFB81C; color: #001a38; font-size: 0.65rem; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 50px; box-shadow: 0 2px 0 #b87800; }
+
   .section-label { font-family: 'Bangers', cursive; font-size: 1.4rem; color: rgba(255,255,255,0.5); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px; padding-left: 4px; }
 
   .cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
 
   .card { position: relative; border-radius: 20px; padding: 24px 18px 20px; cursor: pointer; text-decoration: none; display: block; overflow: hidden; border: 3px solid rgba(255,255,255,0.15); transition: transform 0.15s, box-shadow 0.15s; animation: cardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
-  .card:nth-child(1) { animation-delay: 0.10s; background: linear-gradient(135deg, #E63946, #c1121f); box-shadow: 0 8px 0 #7d0d14; }
-  .card:nth-child(2) { animation-delay: 0.18s; background: linear-gradient(135deg, #2196F3, #1565C0); box-shadow: 0 8px 0 #0d3c6e; }
-  .card:nth-child(3) { animation-delay: 0.26s; background: linear-gradient(135deg, #9C27B0, #6A1B9A); box-shadow: 0 8px 0 #3a0f54; }
-  .card:nth-child(4) { animation-delay: 0.34s; background: linear-gradient(135deg, #FF9800, #E65100); box-shadow: 0 8px 0 #7f2900; }
-  .card:nth-child(5) { animation-delay: 0.42s; background: linear-gradient(135deg, #00BCD4, #006064); box-shadow: 0 8px 0 #003033; }
+  .card:nth-child(1) { animation-delay: 0.15s; background: linear-gradient(135deg, #E63946, #c1121f); box-shadow: 0 8px 0 #7d0d14; }
+  .card:nth-child(2) { animation-delay: 0.22s; background: linear-gradient(135deg, #2196F3, #1565C0); box-shadow: 0 8px 0 #0d3c6e; }
+  .card:nth-child(3) { animation-delay: 0.29s; background: linear-gradient(135deg, #9C27B0, #6A1B9A); box-shadow: 0 8px 0 #3a0f54; }
+  .card:nth-child(4) { animation-delay: 0.36s; background: linear-gradient(135deg, #FF9800, #E65100); box-shadow: 0 8px 0 #7f2900; }
+  .card:nth-child(5) { animation-delay: 0.43s; background: linear-gradient(135deg, #00BCD4, #006064); box-shadow: 0 8px 0 #003033; }
   .card:nth-child(6) { animation-delay: 0.50s; background: linear-gradient(135deg, #4CAF50, #1B5E20); box-shadow: 0 8px 0 #0a2e0c; }
-  .card:nth-child(7) { animation-delay: 0.58s; background: linear-gradient(135deg, #CE1126, #002B5C); box-shadow: 0 8px 0 #001228; }
-  .card:nth-child(8) { animation-delay: 0.66s; background: linear-gradient(135deg, #607D8B, #263238); box-shadow: 0 8px 0 #111c20; }
+  .card:nth-child(7) { animation-delay: 0.57s; background: linear-gradient(135deg, #607D8B, #263238); box-shadow: 0 8px 0 #111c20; }
+  .card:nth-child(8) { animation-delay: 0.64s; background: linear-gradient(135deg, #E91E63, #880E4F); box-shadow: 0 8px 0 #4a0028; }
 
   @keyframes cardPop { from { transform: scale(0.7) translateY(30px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
 
@@ -70,7 +93,7 @@
   .card-title { font-family: 'Bangers', cursive; font-size: 1.5rem; color: white; letter-spacing: 1px; line-height: 1.1; text-shadow: 1px 2px 0 rgba(0,0,0,0.3); }
   .card-desc { font-size: 0.8rem; color: rgba(255,255,255,0.8); font-weight: 700; margin-top: 5px; line-height: 1.3; }
 
-  .streak-bar { background: rgba(255,255,255,0.07); border: 2px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 32px; }
+  .streak-bar { background: rgba(255,255,255,0.07); border: 2px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 16px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
   .streak-icon { font-size: 2rem; }
   .streak-text { flex: 1; }
   .streak-text strong { display: block; font-size: 1rem; color: var(--gold); font-weight: 900; }
@@ -128,6 +151,19 @@
     <div class="streak-count" id="streakCount">0🔥</div>
   </div>
 
+  <!-- FTS BANK - featured at top -->
+  <a class="bank-card" href="FTS_Bank.html">
+    <span class="bank-new-badge">NEW 🏦</span>
+    <div class="bank-card-inner">
+      <div class="bank-card-icon">🏦</div>
+      <div class="bank-card-text">
+        <div class="bank-card-label">🦅 Adelaide Crows</div>
+        <div class="bank-card-title">FTS BANK</div>
+        <div class="bank-card-desc">Your own savings account — earn, save and spend your money!</div>
+      </div>
+    </div>
+  </a>
+
   <div class="section-label">⚡ Your Missions</div>
   <div class="cards-grid">
 
@@ -156,7 +192,6 @@
     </a>
 
     <a class="card" href="Crows_Cash.html">
-      <span class="new-badge">NEW 🦅</span>
       <span class="card-icon">💰</span>
       <div class="card-title">Crows Cash</div>
       <div class="card-desc">Earn money, hit the Crows shop, work out the change!</div>
@@ -171,16 +206,16 @@
 
     <a class="card coming-soon" href="#">
       <span class="coming-badge">Coming Soon</span>
-      <span class="card-icon">🎯</span>
-      <div class="card-title">Mystery Mission</div>
-      <div class="card-desc">Something epic is coming...</div>
+      <span class="card-icon">🏈</span>
+      <div class="card-title">AFL Quiz</div>
+      <div class="card-desc">How well do you know your footy?</div>
     </a>
 
     <a class="card coming-soon" href="#">
       <span class="coming-badge">Coming Soon</span>
-      <span class="card-icon">🏈</span>
-      <div class="card-title">AFL Quiz</div>
-      <div class="card-desc">How well do you know your footy?</div>
+      <span class="card-icon">🎯</span>
+      <div class="card-title">Mystery Mission</div>
+      <div class="card-desc">Something epic is coming...</div>
     </a>
 
   </div>
