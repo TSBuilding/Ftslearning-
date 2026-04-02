@@ -43,11 +43,7 @@
       radial-gradient(1.5px 1.5px at 20% 65%, rgba(255,255,255,0.7) 0%, transparent 100%);
     background-size: 400px 400px;
   }
-  .stars::after {
-    background-size: 600px 600px;
-    opacity: 0.5;
-    animation: twinkle 8s ease-in-out infinite alternate;
-  }
+  .stars::after { background-size: 600px 600px; opacity: 0.5; animation: twinkle 8s ease-in-out infinite alternate; }
   @keyframes twinkle { from { opacity: 0.3; } to { opacity: 0.7; } }
 
   .page { position: relative; z-index: 1; min-height: 100vh; padding: 20px 16px 48px; max-width: 640px; margin: 0 auto; }
@@ -78,9 +74,7 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
 
   .planet-visual { margin: 0 auto 16px; position: relative; display: flex; align-items: center; justify-content: center; }
-
   .planet-body { border-radius: 50%; position: relative; flex-shrink: 0; box-shadow: inset -8px -8px 20px rgba(0,0,0,0.5), inset 4px 4px 12px rgba(255,255,255,0.15); }
-
   .ring-wrap { position: relative; display: flex; align-items: center; justify-content: center; }
   .planet-ring { position: absolute; border-radius: 50%; border-style: solid; transform: rotateX(70deg); pointer-events: none; }
 
@@ -88,7 +82,7 @@
   .planet-venus   .planet-body { width:100px;height:100px; background:radial-gradient(circle at 38% 35%, #f5e6a0, #d4a84b 55%, #a07020); box-shadow: inset -8px -8px 20px rgba(0,0,0,0.4), inset 4px 4px 12px rgba(255,255,200,0.3), 0 0 20px rgba(220,180,60,0.3); }
   .planet-earth   .planet-body { width:100px;height:100px; background:radial-gradient(circle at 38% 35%, #4fa3d1, #2877b8 45%, #1a5a8a); }
   .planet-earth   .planet-body::after { content:''; position:absolute; inset:0; border-radius:50%; background: radial-gradient(ellipse 60% 40% at 55% 35%, rgba(60,160,60,0.7) 0%, transparent 60%), radial-gradient(ellipse 40% 30% at 30% 60%, rgba(60,150,60,0.5) 0%, transparent 50%); }
-  .planet-mars    .planet-body { width:88px;height:88px; background:radial-gradient(circle at 38% 35%, #e8795a, #c0412a 55%, #8b2518); box-shadow: inset -8px -8px 20px rgba(0,0,0,0.4), inset 4px 4px 12px rgba(255,180,140,0.2), 0 0 15px rgba(200,60,30,0.2); }
+  .planet-mars    .planet-body { width:88px;height:88px; background:radial-gradient(circle at 38% 35%, #e8795a, #c0412a 55%, #8b2518); }
   .planet-jupiter .planet-body { width:130px;height:130px; background: repeating-linear-gradient(180deg, #c88040 0px, #e8a060 12px, #d4704a 24px, #f0b878 36px, #c87040 48px, #e89858 60px, #d06030 72px, #e8a060 84px, #c88040 96px, #dda060 108px, #c07030 120px, #e09050 132px); border-radius:50%; }
   .planet-jupiter .planet-body::after { content:''; position:absolute; width:32px;height:20px; background:radial-gradient(ellipse, #d44030, #a02820 70%); border-radius:50%; bottom:38px; left:28px; opacity:0.85; }
   .planet-saturn  .ring-wrap { width:180px; height:130px; }
@@ -96,11 +90,13 @@
   .planet-saturn  .planet-ring { width:170px;height:50px; border-width:10px; border-color: rgba(210,180,80,0.7); z-index:1; }
   .planet-saturn  .planet-ring.r2 { width:190px;height:60px; border-width:6px; border-color: rgba(180,150,60,0.4); }
   .planet-saturn  .planet-ring.r3 { width:152px;height:44px; border-width:5px; border-color: rgba(230,200,100,0.5); }
-  .planet-uranus  .planet-body { width:96px;height:96px; background:radial-gradient(circle at 40% 38%, #c0f0f0, #7dd4d4 50%, #4aabab); box-shadow: inset -8px -8px 20px rgba(0,0,0,0.3), inset 4px 4px 12px rgba(200,255,255,0.3), 0 0 20px rgba(100,220,220,0.2); }
-  .planet-neptune .planet-body { width:92px;height:92px; background:radial-gradient(circle at 38% 35%, #6090f8, #2040d0 55%, #101878); box-shadow: inset -8px -8px 20px rgba(0,0,0,0.4), inset 4px 4px 12px rgba(150,180,255,0.3), 0 0 20px rgba(50,80,220,0.3); }
+  .planet-uranus  .planet-body { width:96px;height:96px; background:radial-gradient(circle at 40% 38%, #c0f0f0, #7dd4d4 50%, #4aabab); }
+  .planet-neptune .planet-body { width:92px;height:92px; background:radial-gradient(circle at 38% 35%, #6090f8, #2040d0 55%, #101878); }
   .planet-neptune .planet-body::after { content:''; position:absolute; width:28px;height:16px; background:rgba(80,120,255,0.6); border-radius:50%; top:28px; right:20px; filter:blur(3px); }
 
-  .planet-name-display { font-family: 'Bangers', cursive; font-size: 1.8rem; color: white; letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); margin-bottom: 12px; }
+  /* Planet name — hidden until answered */
+  .planet-name-display { font-family: 'Bangers', cursive; font-size: 1.8rem; color: white; letter-spacing: 2px; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); margin-bottom: 12px; display: none; }
+  .planet-name-display.revealed { display: block; animation: fadeUp 0.3s ease both; }
   .planet-number { font-size: 0.72rem; font-weight: 900; color: rgba(255,255,255,0.35); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
 
   .fact-list { display: flex; flex-direction: column; gap: 7px; text-align: left; margin-top: 4px; }
@@ -216,6 +212,7 @@
     <div class="planet-card" id="planetCard" style="display:none">
       <div class="planet-number" id="planetNumber">PLANET 1 OF 8</div>
       <div class="planet-visual" id="planetVisual"></div>
+      <!-- Name hidden until answered -->
       <div class="planet-name-display" id="planetNameDisplay"></div>
       <div class="fact-list" id="factList"></div>
       <div class="wow-fact" id="wowFact"></div>
@@ -249,13 +246,13 @@
 <script>
 const PLANETS = [
   {
-    key:'mercury', name:'Mercury', number:1, cssClass:'planet-mercury', color:'#8a7060',
+    key:'mercury', name:'Mercury', number:1,
     facts:[
       {icon:'☀️', text:'The <strong>closest planet</strong> to the Sun — 1st in line'},
       {icon:'🔥', text:'Temperatures swing from <strong>-180°C at night</strong> to <strong>430°C in the day</strong>'},
       {icon:'🌑', text:'The <strong>smallest planet</strong> in our solar system'},
     ],
-    wow:"A year on Mercury is only 88 Earth days — but a day lasts 59 Earth days!",
+    wow:"A year on this planet is only 88 Earth days — but a day lasts 59 Earth days!",
     revealFacts:[
       "Mercury is the smallest planet — smaller than some moons",
       "It has no atmosphere so it can't hold heat overnight",
@@ -263,13 +260,13 @@ const PLANETS = [
     ],
   },
   {
-    key:'venus', name:'Venus', number:2, cssClass:'planet-venus', color:'#d4a84b',
+    key:'venus', name:'Venus', number:2,
     facts:[
-      {icon:'🌡️', text:'The <strong>hottest planet</strong> — even hotter than Mercury!'},
+      {icon:'🌡️', text:'The <strong>hottest planet</strong> — even hotter than the closest planet to the Sun!'},
       {icon:'🌫️', text:'Covered in <strong>thick yellow clouds</strong> of acid'},
       {icon:'🔄', text:'Spins <strong>backwards</strong> compared to most planets'},
     ],
-    wow:"A day on Venus is longer than a year on Venus — it spins incredibly slowly!",
+    wow:"A day on this planet is longer than its year — it spins incredibly slowly!",
     revealFacts:[
       "Venus is the hottest planet at around 465°C — hot enough to melt lead",
       "Its thick atmosphere traps heat like a blanket — this is the greenhouse effect",
@@ -277,13 +274,13 @@ const PLANETS = [
     ],
   },
   {
-    key:'earth', name:'Earth', number:3, cssClass:'planet-earth', color:'#2877b8',
+    key:'earth', name:'Earth', number:3,
     facts:[
       {icon:'💧', text:'The <strong>only planet</strong> known to have life'},
-      {icon:'🌊', text:'<strong>71% of Earth</strong> is covered in water'},
+      {icon:'🌊', text:'<strong>71% of its surface</strong> is covered in water'},
       {icon:'🌙', text:'Has <strong>one moon</strong> that controls our tides'},
     ],
-    wow:"Earth is the densest planet in the solar system — it's the heaviest for its size!",
+    wow:"This planet is the densest in the solar system — it's the heaviest for its size!",
     revealFacts:[
       "Earth is the 3rd planet from the Sun",
       "Our atmosphere protects us from the Sun's harmful rays",
@@ -291,94 +288,94 @@ const PLANETS = [
     ],
   },
   {
-    key:'mars', name:'Mars', number:4, cssClass:'planet-mars', color:'#c0412a',
+    key:'mars', name:'Mars', number:4,
     facts:[
       {icon:'🔴', text:'Called the <strong>Red Planet</strong> because of iron oxide (rust) on its surface'},
-      {icon:'🏔️', text:'Has <strong>Olympus Mons</strong> — the tallest volcano in the solar system'},
-      {icon:'🤖', text:'Several <strong>robots and rovers</strong> have explored Mars'},
+      {icon:'🏔️', text:'Has the <strong>tallest volcano</strong> in the entire solar system'},
+      {icon:'🤖', text:'Several <strong>robots and rovers</strong> have explored its surface'},
     ],
-    wow:"Mars has two tiny moons called Phobos and Deimos — named after fear and dread!",
+    wow:"This planet has two tiny moons named after fear and dread!",
     revealFacts:[
       "Mars is about half the size of Earth",
-      "Olympus Mons is nearly 3 times taller than Mount Everest",
+      "Olympus Mons on Mars is nearly 3 times taller than Mount Everest",
       "Scientists think Mars once had liquid water billions of years ago",
     ],
   },
   {
-    key:'jupiter', name:'Jupiter', number:5, cssClass:'planet-jupiter', color:'#c88040',
+    key:'jupiter', name:'Jupiter', number:5,
     facts:[
       {icon:'👑', text:'The <strong>biggest planet</strong> — more than 1,300 Earths could fit inside!'},
-      {icon:'🌀', text:'The <strong>Great Red Spot</strong> is a storm that has lasted over 350 years'},
+      {icon:'🌀', text:'Has a giant storm called the <strong>Great Red Spot</strong> lasting over 350 years'},
       {icon:'🌙', text:'Has <strong>95 known moons</strong> — more than any other planet'},
     ],
-    wow:"Jupiter's magnetic field is the strongest of any planet — 20,000 times stronger than Earth's!",
+    wow:"This planet's magnetic field is 20,000 times stronger than Earth's!",
     revealFacts:[
       "Jupiter is a gas giant — it has no solid surface to stand on",
-      "The Great Red Spot is a storm bigger than Earth itself",
-      "Jupiter acts like a vacuum cleaner — its gravity pulls in asteroids protecting Earth",
+      "The Great Red Spot storm is bigger than Earth itself",
+      "Jupiter's gravity pulls in asteroids, protecting Earth from impacts",
     ],
   },
   {
-    key:'saturn', name:'Saturn', number:6, cssClass:'planet-saturn', color:'#c8a840',
+    key:'saturn', name:'Saturn', number:6,
     facts:[
       {icon:'💍', text:'Famous for its <strong>beautiful rings</strong> made of ice and rock'},
       {icon:'🏊', text:'So light it could <strong>float on water</strong> — the least dense planet'},
-      {icon:'🌙', text:'Has <strong>146 known moons</strong> including Titan which has its own atmosphere'},
+      {icon:'🌙', text:'Has <strong>146 known moons</strong> including one with its own atmosphere'},
     ],
-    wow:"Saturn's rings stretch 282,000 km wide but are only 1 km thick!",
+    wow:"This planet's rings stretch 282,000 km wide but are only about 1 km thick!",
     revealFacts:[
       "Saturn is the 6th planet from the Sun and the second largest",
       "Saturn's moon Titan has lakes and seas — but made of liquid methane not water",
-      "Saturn takes 29 Earth years to orbit the Sun once",
+      "Saturn takes 29 Earth years to complete one orbit of the Sun",
     ],
   },
   {
-    key:'uranus', name:'Uranus', number:7, cssClass:'planet-uranus', color:'#7dd4d4',
+    key:'uranus', name:'Uranus', number:7,
     facts:[
       {icon:'🔵', text:'An <strong>ice giant</strong> with a pale blue-green colour from methane gas'},
-      {icon:'🔄', text:'Rotates <strong>on its side</strong> — its north pole points at the Sun'},
+      {icon:'🔄', text:'Rotates <strong>completely on its side</strong> — its pole points at the Sun'},
       {icon:'❄️', text:'One of the <strong>coldest planets</strong> — temperatures reach -224°C'},
     ],
-    wow:"Uranus has 13 rings AND 28 moons — but was only discovered in 1781 with a telescope!",
+    wow:"This planet has 13 rings AND 28 moons — but was only discovered in 1781!",
     revealFacts:[
       "Uranus is the 7th planet from the Sun",
       "Because it spins on its side, one pole gets 42 years of sunlight then 42 years of darkness",
-      "Uranus was the first planet discovered with a telescope",
+      "Uranus was the first planet discovered using a telescope",
     ],
   },
   {
-    key:'neptune', name:'Neptune', number:8, cssClass:'planet-neptune', color:'#2040d0',
+    key:'neptune', name:'Neptune', number:8,
     facts:[
       {icon:'🔵', text:'The <strong>farthest planet</strong> from the Sun — 8th in line'},
       {icon:'💨', text:'Has the <strong>fastest winds</strong> in the solar system — up to 2,100 km/h!'},
-      {icon:'🧊', text:'Another <strong>ice giant</strong> — deep blue from methane in its atmosphere'},
+      {icon:'🧊', text:'A deep blue <strong>ice giant</strong> — the coldest of all the planets'},
     ],
-    wow:"One year on Neptune = 165 Earth years. It only completed its first orbit since discovery in 2011!",
+    wow:"One year on this planet equals 165 Earth years!",
     revealFacts:[
       "Neptune is so far away that sunlight takes 4 hours to reach it",
       "Neptune has 16 known moons — its largest Triton orbits backwards",
-      "Neptune was predicted by maths before it was even seen through a telescope",
+      "Neptune was predicted by mathematics before it was ever seen through a telescope",
     ],
   },
 ];
 
 const P2_QUESTIONS = [
-  {q:"Which planet is the BIGGEST?",                     answer:"Jupiter",  distractors:["Saturn","Uranus","Neptune"]},
-  {q:"Which planet is the SMALLEST?",                    answer:"Mercury",  distractors:["Mars","Venus","Earth"]},
-  {q:"Which planet is CLOSEST to the Sun?",              answer:"Mercury",  distractors:["Venus","Earth","Mars"]},
-  {q:"Which planet is FARTHEST from the Sun?",           answer:"Neptune",  distractors:["Uranus","Saturn","Jupiter"]},
-  {q:"Which planet is known as the RED PLANET?",         answer:"Mars",     distractors:["Venus","Mercury","Jupiter"]},
-  {q:"Which planet is the HOTTEST?",                     answer:"Venus",    distractors:["Mercury","Mars","Jupiter"]},
-  {q:"Which planet has the most famous RINGS?",          answer:"Saturn",   distractors:["Jupiter","Uranus","Neptune"]},
-  {q:"Which planet has the most MOONS?",                 answer:"Saturn",   distractors:["Jupiter","Uranus","Neptune"]},
-  {q:"Which planet has a storm called the GREAT RED SPOT?", answer:"Jupiter", distractors:["Saturn","Neptune","Mars"]},
-  {q:"Which planet has the FASTEST WINDS?",              answer:"Neptune",  distractors:["Jupiter","Saturn","Uranus"]},
-  {q:"Which planet could FLOAT on water?",               answer:"Saturn",   distractors:["Uranus","Jupiter","Neptune"]},
-  {q:"Which planet rotates on its SIDE?",                answer:"Uranus",   distractors:["Neptune","Saturn","Venus"]},
-  {q:"Which planet is the ONLY one with life?",          answer:"Earth",    distractors:["Mars","Venus","Jupiter"]},
-  {q:"Which planet spins BACKWARDS?",                    answer:"Venus",    distractors:["Uranus","Neptune","Mercury"]},
-  {q:"Which planet has the TALLEST volcano?",            answer:"Mars",     distractors:["Earth","Venus","Jupiter"]},
-  {q:"Which planet has the STRONGEST magnetic field?",   answer:"Jupiter",  distractors:["Saturn","Earth","Neptune"]},
+  {q:"Which planet is the BIGGEST?",                       answer:"Jupiter",  distractors:["Saturn","Uranus","Neptune"]},
+  {q:"Which planet is the SMALLEST?",                      answer:"Mercury",  distractors:["Mars","Venus","Earth"]},
+  {q:"Which planet is CLOSEST to the Sun?",                answer:"Mercury",  distractors:["Venus","Earth","Mars"]},
+  {q:"Which planet is FARTHEST from the Sun?",             answer:"Neptune",  distractors:["Uranus","Saturn","Jupiter"]},
+  {q:"Which planet is known as the RED PLANET?",           answer:"Mars",     distractors:["Venus","Mercury","Jupiter"]},
+  {q:"Which planet is the HOTTEST?",                       answer:"Venus",    distractors:["Mercury","Mars","Jupiter"]},
+  {q:"Which planet has the most famous RINGS?",            answer:"Saturn",   distractors:["Jupiter","Uranus","Neptune"]},
+  {q:"Which planet has the most MOONS?",                   answer:"Saturn",   distractors:["Jupiter","Uranus","Neptune"]},
+  {q:"Which planet has the GREAT RED SPOT storm?",         answer:"Jupiter",  distractors:["Saturn","Neptune","Mars"]},
+  {q:"Which planet has the FASTEST WINDS?",                answer:"Neptune",  distractors:["Jupiter","Saturn","Uranus"]},
+  {q:"Which planet could FLOAT on water?",                 answer:"Saturn",   distractors:["Uranus","Jupiter","Neptune"]},
+  {q:"Which planet rotates completely on its SIDE?",       answer:"Uranus",   distractors:["Neptune","Saturn","Venus"]},
+  {q:"Which planet is the ONLY one with life?",            answer:"Earth",    distractors:["Mars","Venus","Jupiter"]},
+  {q:"Which planet spins BACKWARDS?",                      answer:"Venus",    distractors:["Uranus","Neptune","Mercury"]},
+  {q:"Which planet has the TALLEST volcano?",              answer:"Mars",     distractors:["Earth","Venus","Jupiter"]},
+  {q:"Which planet has the STRONGEST magnetic field?",     answer:"Jupiter",  distractors:["Saturn","Earth","Neptune"]},
 ];
 
 let phase=1, p1Order=[], p2Questions=[];
@@ -396,7 +393,7 @@ function updateStreak(){
   else{streak=1;localStorage.setItem('streak',streak);localStorage.setItem('lastVisit',today);}
 }
 
-function buildPlanetVisual(planetKey, size) {
+function buildPlanetVisual(planetKey,size){
   const wrap=document.createElement('div');
   wrap.className=`planet-${planetKey}`;
   if(planetKey==='saturn'){
@@ -438,26 +435,42 @@ function renderQuestion(){
   const totalDone=(phase===1?current:8+current);
   document.getElementById('progressFill').style.width=(totalDone/TOTAL*100)+'%';
   document.getElementById('progressText').textContent=totalDone+' / '+TOTAL;
-  if(phase===1)renderPhase1(); else renderPhase2();
+  if(phase===1) renderPhase1(); else renderPhase2();
 }
 
 function renderPhase1(){
   const planet=PLANETS[p1Order[current]];
   document.getElementById('phasePill').textContent='🔭 PHASE 1 — LEARN THE PLANETS';
   document.getElementById('phasePill').className='phase-pill p1';
-  const card=document.getElementById('planetCard'); card.style.display='block';
+
+  const card=document.getElementById('planetCard');
+  card.style.display='block';
   document.getElementById('planetNumber').textContent='PLANET '+(current+1)+' OF 8';
-  document.getElementById('planetNameDisplay').textContent=planet.name;
-  document.getElementById('wowFact').textContent=planet.wow;
-  const vis=document.getElementById('planetVisual'); vis.innerHTML='';
+
+  // Hide name until answered
+  const nameEl=document.getElementById('planetNameDisplay');
+  nameEl.textContent=planet.name;
+  nameEl.className='planet-name-display'; // hidden by default
+
+  // Build visual
+  const vis=document.getElementById('planetVisual');
+  vis.innerHTML='';
   vis.appendChild(buildPlanetVisual(planet.key,'large'));
-  const fl=document.getElementById('factList'); fl.innerHTML='';
+
+  // Facts — name stripped out, using generic language
+  const fl=document.getElementById('factList');
+  fl.innerHTML='';
   planet.facts.forEach(f=>{
     const item=document.createElement('div'); item.className='fact-item';
     item.innerHTML=`<span class="fact-icon">${f.icon}</span><span class="fact-text">${f.text}</span>`;
     fl.appendChild(item);
   });
-  document.getElementById('qPrompt').textContent='⬆️ Read the facts above — then tap the planet\'s name below!';
+
+  // Wow fact — name already stripped in data
+  document.getElementById('wowFact').textContent=planet.wow;
+
+  document.getElementById('qPrompt').textContent='⬆️ Read the clues — which planet is this?';
+
   const others=shuffle(PLANETS.filter(p=>p.key!==planet.key)).slice(0,3).map(p=>p.name);
   buildChoices(shuffle([planet.name,...others]),planet.name,planet);
 }
@@ -473,7 +486,8 @@ function renderPhase2(){
 }
 
 function buildChoices(choices,correct,planet){
-  const grid=document.getElementById('choicesGrid'); grid.innerHTML='';
+  const grid=document.getElementById('choicesGrid');
+  grid.innerHTML='';
   choices.forEach(name=>{
     const btn=document.createElement('button'); btn.className='choice-btn'; btn.textContent=name;
     btn.onclick=()=>handleChoice(btn,name,correct,planet);
@@ -486,8 +500,12 @@ function handleChoice(btn,chosen,correct,planet){
   answered=true;
   document.querySelectorAll('.choice-btn').forEach(b=>b.disabled=true);
   const fb=document.getElementById('feedback');
-  const reveal=document.getElementById('revealCard');
   const isCorrect=chosen===correct;
+
+  // Reveal planet name if phase 1
+  if(phase===1){
+    document.getElementById('planetNameDisplay').className='planet-name-display revealed';
+  }
 
   if(isCorrect){
     score++; if(phase===1)p1Score++; else p2Score++;
@@ -506,7 +524,9 @@ function handleChoice(btn,chosen,correct,planet){
     });
   }
 
+  // Reveal extra facts
   if(planet&&planet.revealFacts){
+    const reveal=document.getElementById('revealCard');
     reveal.className='reveal-card show'+(isCorrect?'':' wrong-reveal');
     const rt=document.getElementById('revealTitle');
     rt.className='reveal-title '+(isCorrect?'correct':'wrong');
