@@ -40,20 +40,20 @@
   .crow-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--red), #a00d1e); border: 3px solid var(--gold); border-radius: 14px; padding: 8px 18px; margin-bottom: 10px; box-shadow: 0 5px 0 rgba(0,0,0,0.3); }
   .crow-badge span { font-family: 'Bangers', cursive; font-size: 1.2rem; color: var(--gold); letter-spacing: 2px; }
 
-  .pin-screen { text-align: center; }
   .pin-title { font-family: 'Bangers', cursive; font-size: clamp(1.8rem, 7vw, 2.8rem); color: var(--gold); letter-spacing: 3px; text-shadow: 3px 3px 0 var(--red); margin-bottom: 6px; }
   .pin-sub { color: rgba(255,255,255,0.55); font-weight: 700; font-size: 0.88rem; margin-bottom: 24px; letter-spacing: 1px; }
 
   .pin-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
   .pin-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); background: transparent; transition: all 0.2s; }
   .pin-dot.filled { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px rgba(255,184,28,0.5); }
-  .pin-dot.error { background: var(--wrong); border-color: var(--wrong); animation: shake 0.4s ease; }
+  .pin-dot.error  { background: var(--wrong); border-color: var(--wrong); animation: shake 0.4s ease; }
+  .pin-dot.ok     { background: var(--green); border-color: var(--green); }
 
   .pin-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 280px; margin: 0 auto; }
   .pin-key { font-family: 'Bangers', cursive; font-size: 1.8rem; color: white; background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 18px 8px; cursor: pointer; letter-spacing: 1px; transition: all 0.12s; box-shadow: 0 4px 0 rgba(0,0,0,0.3); -webkit-user-select: none; user-select: none; }
-  .pin-key:hover { background: rgba(255,255,255,0.14); }
+  .pin-key:hover  { background: rgba(255,255,255,0.14); }
   .pin-key:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,0.3); }
-  .pin-key.del { background: rgba(206,17,38,0.2); border-color: rgba(206,17,38,0.3); font-size: 1.2rem; }
+  .pin-key.del    { background: rgba(206,17,38,0.2); border-color: rgba(206,17,38,0.3); font-size: 1.2rem; }
 
   .pin-msg { font-family: 'Bangers', cursive; font-size: 1rem; letter-spacing: 2px; min-height: 28px; margin-top: 14px; }
   .pin-msg.error { color: var(--wrong); }
@@ -63,10 +63,10 @@
 
   .balance-card { background: linear-gradient(135deg, var(--red) 0%, #7a0010 50%, var(--navy) 100%); border: 3px solid var(--gold); border-radius: 24px; padding: 24px 22px; margin-bottom: 16px; box-shadow: 0 8px 0 rgba(0,0,0,0.3), 0 0 40px rgba(206,17,38,0.2); position: relative; overflow: hidden; }
   .balance-card::before { content: '🦅'; position: absolute; right: -10px; bottom: -10px; font-size: 7rem; opacity: 0.08; transform: rotate(-15deg); pointer-events: none; }
-  .balance-label { font-family: 'Bangers', cursive; font-size: 0.85rem; color: rgba(255,184,28,0.7); letter-spacing: 3px; margin-bottom: 4px; }
+  .balance-label  { font-family: 'Bangers', cursive; font-size: 0.85rem; color: rgba(255,184,28,0.7); letter-spacing: 3px; margin-bottom: 4px; }
   .balance-amount { font-family: 'Bangers', cursive; font-size: clamp(3rem, 12vw, 5rem); color: var(--gold); letter-spacing: 2px; text-shadow: 3px 3px 0 rgba(0,0,0,0.3); line-height: 1; }
-  .balance-name { font-size: 0.82rem; font-weight: 800; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
-  .balance-acct { font-family: 'Bangers', cursive; font-size: 0.8rem; color: rgba(255,255,255,0.25); letter-spacing: 3px; margin-top: 2px; }
+  .balance-name   { font-size: 0.82rem; font-weight: 800; color: rgba(255,255,255,0.5); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+  .balance-acct   { font-family: 'Bangers', cursive; font-size: 0.8rem; color: rgba(255,255,255,0.25); letter-spacing: 3px; margin-top: 2px; }
 
   .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
   .action-btn { font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 1px; border: none; border-radius: 16px; padding: 16px 8px; cursor: pointer; text-align: center; transition: transform 0.12s, box-shadow 0.12s; -webkit-user-select: none; user-select: none; }
@@ -86,18 +86,18 @@
   .tx-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 10px 12px; animation: txSlide 0.3s ease both; }
   @keyframes txSlide { from { opacity: 0; transform: translateX(-12px); } to { opacity: 1; transform: translateX(0); } }
 
-  .tx-icon { font-size: 1.4rem; flex-shrink: 0; }
-  .tx-info { flex: 1; min-width: 0; }
-  .tx-desc { font-weight: 800; color: white; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .tx-date { font-size: 0.72rem; color: rgba(255,255,255,0.35); font-weight: 700; margin-top: 1px; }
+  .tx-icon   { font-size: 1.4rem; flex-shrink: 0; }
+  .tx-info   { flex: 1; min-width: 0; }
+  .tx-desc   { font-weight: 800; color: white; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tx-date   { font-size: 0.72rem; color: rgba(255,255,255,0.35); font-weight: 700; margin-top: 1px; }
   .tx-amount { font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 1px; flex-shrink: 0; }
   .tx-amount.credit { color: var(--green); }
   .tx-amount.debit  { color: var(--wrong); }
-  .tx-empty { text-align: center; color: rgba(255,255,255,0.3); font-weight: 800; font-size: 0.85rem; padding: 24px 0; letter-spacing: 1px; }
+  .tx-empty  { text-align: center; color: rgba(255,255,255,0.3); font-weight: 800; font-size: 0.85rem; padding: 24px 0; letter-spacing: 1px; }
 
-  .form-title { font-family: 'Bangers', cursive; font-size: clamp(1.6rem, 6vw, 2.4rem); color: var(--gold); letter-spacing: 2px; text-shadow: 2px 2px 0 var(--red); margin-bottom: 16px; text-align: center; }
+  .form-title   { font-family: 'Bangers', cursive; font-size: clamp(1.6rem, 6vw, 2.4rem); color: var(--gold); letter-spacing: 2px; text-shadow: 2px 2px 0 var(--red); margin-bottom: 16px; text-align: center; }
   .form-section { margin-bottom: 14px; }
-  .form-label { font-family: 'Bangers', cursive; font-size: 0.85rem; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .form-label   { font-family: 'Bangers', cursive; font-size: 0.85rem; color: rgba(255,255,255,0.45); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
 
   .chore-list { display: flex; flex-direction: column; gap: 8px; }
   .chore-pick { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: all 0.18s; -webkit-user-select: none; user-select: none; }
@@ -121,20 +121,23 @@
   .desc-input::placeholder { color: rgba(255,255,255,0.25); }
 
   .total-preview { text-align: center; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 14px; }
-  .total-preview-label { font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
+  .total-preview-label  { font-size: 0.75rem; font-weight: 800; color: rgba(255,255,255,0.4); letter-spacing: 2px; text-transform: uppercase; }
   .total-preview-amount { font-family: 'Bangers', cursive; font-size: 2.2rem; letter-spacing: 2px; margin-top: 2px; }
   .total-preview-amount.credit { color: var(--green); }
   .total-preview-amount.debit  { color: var(--wrong); }
 
   .btn-confirm { font-family: 'Bangers', cursive; font-size: 1.3rem; letter-spacing: 2px; background: linear-gradient(135deg, var(--gold), #e6a000); color: var(--dark); border: none; border-radius: 50px; padding: 14px 36px; cursor: pointer; box-shadow: 0 6px 0 #b87800; transition: transform 0.12s, box-shadow 0.12s; display: block; width: 100%; margin-bottom: 8px; }
-  .btn-confirm:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #b87800; }
-  .btn-confirm:active { transform: translateY(3px); box-shadow: 0 3px 0 #b87800; }
+  .btn-confirm:hover   { transform: translateY(-2px); box-shadow: 0 8px 0 #b87800; }
+  .btn-confirm:active  { transform: translateY(3px);  box-shadow: 0 3px 0 #b87800; }
   .btn-confirm:disabled { opacity: 0.4; cursor: default; transform: none; }
   .btn-confirm.red { background: linear-gradient(135deg, var(--red), #a00d1e); color: white; box-shadow: 0 6px 0 #7a0010; }
   .btn-confirm.red:hover { box-shadow: 0 8px 0 #7a0010; }
 
   .btn-cancel { font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 2px; background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.6); border: 2px solid rgba(255,255,255,0.13); border-radius: 50px; padding: 11px 32px; cursor: pointer; transition: all 0.15s; display: block; width: 100%; text-align: center; }
   .btn-cancel:hover { background: rgba(255,255,255,0.12); color: white; }
+
+  .btn-change-pin { font-family: 'Bangers', cursive; font-size: 1.1rem; letter-spacing: 2px; background: rgba(255,184,28,0.08); color: rgba(255,184,28,0.7); border: 2px solid rgba(255,184,28,0.2); border-radius: 50px; padding: 11px 32px; cursor: pointer; transition: all 0.15s; display: block; width: 100%; text-align: center; margin-top: 8px; }
+  .btn-change-pin:hover { background: rgba(255,184,28,0.15); color: var(--gold); }
 
   .money-pop { position: fixed; pointer-events: none; z-index: 999; font-family: 'Bangers', cursive; font-size: 1.8rem; text-shadow: 2px 2px 0 rgba(0,0,0,0.5); animation: moneyFly 1.2s ease forwards; }
   @keyframes moneyFly { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-100px) scale(1.4); opacity: 0; } }
@@ -148,9 +151,9 @@
   .splash { position: fixed; inset: 0; background: var(--navy); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; animation: splashOut 0.5s ease 2s both; }
   @keyframes splashOut { to { opacity: 0; pointer-events: none; } }
   .splash-inner { background: linear-gradient(135deg, var(--red), #a00d1e); border: 3px solid var(--gold); border-radius: 20px; padding: 20px 32px; text-align: center; animation: splashBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both; }
-  .splash-icon { font-size: 4rem; display: block; }
+  .splash-icon  { font-size: 4rem; display: block; }
   .splash-title { font-family: 'Bangers', cursive; font-size: 2.8rem; color: var(--gold); letter-spacing: 3px; text-shadow: 3px 3px 0 rgba(0,0,0,0.4); }
-  .splash-sub { color: rgba(255,255,255,0.6); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; animation: splashBounce 0.5s ease 0.9s both; }
+  .splash-sub   { color: rgba(255,255,255,0.6); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; animation: splashBounce 0.5s ease 0.9s both; }
   @keyframes splashBounce { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
   .setup-steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
@@ -161,6 +164,10 @@
   .divider { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
   .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
   .divider-text { font-size: 0.72rem; font-weight: 800; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; }
+
+  /* Change PIN steps */
+  .change-step { display: none; text-align: center; }
+  .change-step.active { display: block; }
 </style>
 </head>
 <body>
@@ -232,7 +239,7 @@
       <span>🦅</span><span>FTS BANK</span><span>🦅</span>
     </div>
     <div class="pin-title" id="loginTitle">WELCOME BACK!</div>
-    <div class="pin-sub" id="loginSub">Enter your PIN to access your bank</div>
+    <div class="pin-sub">Enter your PIN to access your bank</div>
     <div class="pin-dots" id="loginDots">
       <div class="pin-dot"></div><div class="pin-dot"></div>
       <div class="pin-dot"></div><div class="pin-dot"></div>
@@ -254,7 +261,7 @@
   </div>
 
   <div class="action-row">
-    <button class="action-btn deposit" onclick="showDeposit()">
+    <button class="action-btn deposit"  onclick="showDeposit()">
       <span class="action-icon">➕</span>ADD MONEY
     </button>
     <button class="action-btn withdraw" onclick="showWithdraw()">
@@ -269,7 +276,8 @@
     </div>
   </div>
 
-  <button class="btn-cancel" onclick="lockBank()" style="margin-top:6px;">🔒 Lock My Bank</button>
+  <button class="btn-change-pin" onclick="showChangePin()">🔐 Change My PIN</button>
+  <button class="btn-cancel" onclick="lockBank()" style="margin-top:8px;">🔒 Lock My Bank</button>
 </div>
 
 <!-- DEPOSIT -->
@@ -341,6 +349,53 @@
   </button>
 </div>
 
+<!-- CHANGE PIN -->
+<div class="screen" id="screenChangePin">
+  <button class="btn-cancel" onclick="showDash()" style="width:auto;display:inline-block;margin-bottom:16px;">← Back</button>
+
+  <!-- Step 1: verify current PIN -->
+  <div class="change-step active" id="changeStep1">
+    <div style="text-align:center;">
+      <div class="pin-title">CHANGE PIN 🔐</div>
+      <div class="pin-sub">First, enter your current PIN to confirm it's you.</div>
+      <div class="pin-dots" id="changeDots1">
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad" id="changePad1"></div>
+      <div class="pin-msg" id="changeMsg1"></div>
+    </div>
+  </div>
+
+  <!-- Step 2: enter new PIN -->
+  <div class="change-step" id="changeStep2">
+    <div style="text-align:center;">
+      <div class="pin-title">NEW PIN 🔐</div>
+      <div class="pin-sub">Choose your new 4-digit PIN.</div>
+      <div class="pin-dots" id="changeDots2">
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad" id="changePad2"></div>
+      <div class="pin-msg" id="changeMsg2"></div>
+    </div>
+  </div>
+
+  <!-- Step 3: confirm new PIN -->
+  <div class="change-step" id="changeStep3">
+    <div style="text-align:center;">
+      <div class="pin-title">CONFIRM PIN 🔐</div>
+      <div class="pin-sub">Enter your new PIN one more time.</div>
+      <div class="pin-dots" id="changeDots3">
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+        <div class="pin-dot"></div><div class="pin-dot"></div>
+      </div>
+      <div class="pin-pad" id="changePad3"></div>
+      <div class="pin-msg" id="changeMsg3"></div>
+    </div>
+  </div>
+</div>
+
 <script>
 const K_PIN='ftsbank_pin',K_NAME='ftsbank_name',K_BALANCE='ftsbank_balance',K_TX='ftsbank_tx',K_SETUP='ftsbank_setup';
 
@@ -358,7 +413,8 @@ const CHORES=[
 ];
 
 let balance=0,transactions=[],selectedChore=null;
-let setupPin1='',setupPin2='',loginPin='',setupName='';
+let setupPin1='',setupPin2='',loginPin='';
+let changePin1='',changePin2='',changePin3='';
 
 function init(){
   if(!localStorage.getItem(K_SETUP)){
@@ -394,26 +450,31 @@ function buildPinPad(containerId,handler){
   });
 }
 
-function updateDots(dotsId,pin,errorClass){
+function updateDots(dotsId,pin,cls){
   const dots=document.getElementById(dotsId).querySelectorAll('.pin-dot');
-  dots.forEach((d,i)=>{d.className='pin-dot';if(i<pin.length)d.classList.add(errorClass||'filled');});
+  dots.forEach((d,i)=>{d.className='pin-dot';if(i<pin.length)d.classList.add(cls||'filled');});
 }
 
+function errDots(dotsId){
+  updateDots(dotsId,'1234','error');
+  setTimeout(()=>updateDots(dotsId,''),900);
+}
+
+// ── SETUP ────────────────────────────────────────────────────────────────────
 function setupStep2(){
-  const nameInput=document.getElementById('setupName').value.trim();
-  if(!nameInput){document.getElementById('setupName').focus();return;}
-  setupName=nameInput;
+  const n=document.getElementById('setupName').value.trim();
+  if(!n){document.getElementById('setupName').focus();return;}
   document.getElementById('setupPhase1').style.display='none';
   document.getElementById('setupPhase2').style.display='block';
   document.getElementById('setupStep1').className='setup-step done';
   document.getElementById('setupStep2').className='setup-step active';
+  localStorage.setItem(K_NAME,n);
 }
 
 function onSetupPin1Key(k){
   if(k==='⌫')setupPin1=setupPin1.slice(0,-1);
   else if(setupPin1.length<4)setupPin1+=k;
   updateDots('setupDots1',setupPin1);
-  document.getElementById('setupMsg1').textContent='';
   if(setupPin1.length===4){
     setTimeout(()=>{
       document.getElementById('setupPhase2').style.display='none';
@@ -428,11 +489,9 @@ function onSetupPin2Key(k){
   if(k==='⌫')setupPin2=setupPin2.slice(0,-1);
   else if(setupPin2.length<4)setupPin2+=k;
   updateDots('setupDots2',setupPin2);
-  document.getElementById('setupMsg2').textContent='';
   if(setupPin2.length===4){
     if(setupPin2===setupPin1){
       localStorage.setItem(K_PIN,setupPin1);
-      localStorage.setItem(K_NAME,setupName);
       localStorage.setItem(K_BALANCE,'0');
       localStorage.setItem(K_TX,'[]');
       localStorage.setItem(K_SETUP,'1');
@@ -445,12 +504,12 @@ function onSetupPin2Key(k){
       setupPin2='';
       document.getElementById('setupMsg2').textContent="Hmm, that didn't match — try again!";
       document.getElementById('setupMsg2').className='pin-msg error';
-      updateDots('setupDots2',setupPin2,'error');
-      setTimeout(()=>{updateDots('setupDots2','');document.getElementById('setupMsg2').textContent='';},1000);
+      errDots('setupDots2');
     }
   }
 }
 
+// ── LOGIN ────────────────────────────────────────────────────────────────────
 function onLoginKey(k){
   if(k==='⌫')loginPin=loginPin.slice(0,-1);
   else if(loginPin.length<4)loginPin+=k;
@@ -464,8 +523,8 @@ function onLoginKey(k){
     } else {
       document.getElementById('loginMsg').textContent='❌ Wrong PIN — try again!';
       document.getElementById('loginMsg').className='pin-msg error';
-      updateDots('loginDots',loginPin,'error');
-      setTimeout(()=>{loginPin='';updateDots('loginDots','');document.getElementById('loginMsg').textContent='';},900);
+      errDots('loginDots');
+      setTimeout(()=>{loginPin='';document.getElementById('loginMsg').textContent='';},900);
     }
   }
 }
@@ -480,6 +539,88 @@ function lockBank(){
   buildPinPad('loginPad',onLoginKey);
 }
 
+// ── CHANGE PIN ───────────────────────────────────────────────────────────────
+function showChangePin(){
+  changePin1='';changePin2='';changePin3='';
+  ['changeDots1','changeDots2','changeDots3'].forEach(id=>updateDots(id,''));
+  ['changeMsg1','changeMsg2','changeMsg3'].forEach(id=>{
+    document.getElementById(id).textContent='';
+    document.getElementById(id).className='pin-msg';
+  });
+  document.getElementById('changeStep1').className='change-step active';
+  document.getElementById('changeStep2').className='change-step';
+  document.getElementById('changeStep3').className='change-step';
+  buildPinPad('changePad1',onChangePin1Key);
+  buildPinPad('changePad2',onChangePin2Key);
+  buildPinPad('changePad3',onChangePin3Key);
+  showScreen('screenChangePin');
+}
+
+function onChangePin1Key(k){
+  if(k==='⌫')changePin1=changePin1.slice(0,-1);
+  else if(changePin1.length<4)changePin1+=k;
+  updateDots('changeDots1',changePin1);
+  document.getElementById('changeMsg1').textContent='';
+  if(changePin1.length===4){
+    if(changePin1===localStorage.getItem(K_PIN)){
+      updateDots('changeDots1',changePin1,'ok');
+      document.getElementById('changeMsg1').textContent='✅ Confirmed!';
+      document.getElementById('changeMsg1').className='pin-msg ok';
+      setTimeout(()=>{
+        document.getElementById('changeStep1').className='change-step';
+        document.getElementById('changeStep2').className='change-step active';
+      },600);
+    } else {
+      document.getElementById('changeMsg1').textContent='❌ Wrong PIN — try again!';
+      document.getElementById('changeMsg1').className='pin-msg error';
+      errDots('changeDots1');
+      setTimeout(()=>{changePin1='';document.getElementById('changeMsg1').textContent='';},900);
+    }
+  }
+}
+
+function onChangePin2Key(k){
+  if(k==='⌫')changePin2=changePin2.slice(0,-1);
+  else if(changePin2.length<4)changePin2+=k;
+  updateDots('changeDots2',changePin2);
+  if(changePin2.length===4){
+    setTimeout(()=>{
+      document.getElementById('changeStep2').className='change-step';
+      document.getElementById('changeStep3').className='change-step active';
+    },300);
+  }
+}
+
+function onChangePin3Key(k){
+  if(k==='⌫')changePin3=changePin3.slice(0,-1);
+  else if(changePin3.length<4)changePin3+=k;
+  updateDots('changeDots3',changePin3);
+  document.getElementById('changeMsg3').textContent='';
+  if(changePin3.length===4){
+    if(changePin3===changePin2){
+      localStorage.setItem(K_PIN,changePin2);
+      updateDots('changeDots3',changePin3,'ok');
+      document.getElementById('changeMsg3').textContent='🎉 PIN CHANGED!';
+      document.getElementById('changeMsg3').className='pin-msg ok';
+      launchConfetti(30);
+      setTimeout(()=>showDash(),1000);
+    } else {
+      document.getElementById('changeMsg3').textContent="Didn't match — try again!";
+      document.getElementById('changeMsg3').className='pin-msg error';
+      errDots('changeDots3');
+      setTimeout(()=>{
+        changePin3='';
+        changePin2='';
+        document.getElementById('changeMsg3').textContent='';
+        document.getElementById('changeStep3').className='change-step';
+        document.getElementById('changeStep2').className='change-step active';
+        updateDots('changeDots2','');
+      },900);
+    }
+  }
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────────────────────
 function showDash(){
   balance=parseFloat(localStorage.getItem(K_BALANCE)||'0');
   transactions=JSON.parse(localStorage.getItem(K_TX)||'[]');
@@ -518,6 +659,7 @@ function addTransaction(type,amount,desc,emoji){
   localStorage.setItem(K_TX,JSON.stringify(transactions));
 }
 
+// ── DEPOSIT ──────────────────────────────────────────────────────────────────
 function showDeposit(){
   selectedChore=null;
   document.getElementById('depositCustom').value='';
@@ -587,6 +729,7 @@ function confirmDeposit(){
   if(amount>=5)launchConfetti(25);
 }
 
+// ── WITHDRAW ─────────────────────────────────────────────────────────────────
 function showWithdraw(){
   document.getElementById('withdrawAmount').value='';
   document.getElementById('withdrawDesc').value='';
@@ -629,6 +772,7 @@ function confirmWithdraw(){
   showMoneyPop('-'+fmt(amount),false);
 }
 
+// ── HELPERS ──────────────────────────────────────────────────────────────────
 function showMoneyPop(text,isCredit){
   const pop=document.createElement('div');
   pop.className='money-pop';
