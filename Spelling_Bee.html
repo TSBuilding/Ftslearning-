@@ -778,7 +778,7 @@ function showScreen(name) {
 function speak(text, onEnd) {
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
-  utt.rate = 0.88;
+  utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.lang = 'en-AU';
   if (onEnd) utt.onend = onEnd;
@@ -795,8 +795,9 @@ function speakCurrentWord() {
     btn.classList.remove('speaking');
     btn.querySelector('span:last-child').textContent = 'Hear the Word';
   });
-  setTimeout(() => {
-    document.getElementById('sentence-hint').textContent = `"${currentWord.sentence}"`;
+setTimeout(() => {
+    const masked = currentWord.sentence.replace(new RegExp('\\b' + currentWord.word + '\\b', 'gi'), '*'.repeat(currentWord.word.length));
+    document.getElementById('sentence-hint').textContent = `"${masked}"`;
   }, 1200);
 }
 
