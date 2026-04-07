@@ -796,7 +796,11 @@ function speakCurrentWord() {
     btn.querySelector('span:last-child').textContent = 'Hear the Word';
   });
 setTimeout(() => {
-    const masked = currentWord.sentence.replace(new RegExp('\\b' + currentWord.word + '\\b', 'gi'), '*'.repeat(currentWord.word.length));
+    const stars = '*'.repeat(currentWord.word.length);
+    const masked = currentWord.sentence.split(' ').map(w => {
+      const clean = w.replace(/[^a-zA-Z]/g, '').toLowerCase();
+      return clean === currentWord.word.toLowerCase() ? w.replace(/[a-zA-Z]/g, '*') : w;
+    }).join(' ');
     document.getElementById('sentence-hint').textContent = `"${masked}"`;
   }, 1200);
 }
