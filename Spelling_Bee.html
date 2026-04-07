@@ -781,6 +781,14 @@ function speak(text, onEnd) {
   utt.rate = 0.7;
   utt.pitch = 1.05;
   utt.lang = 'en-AU';
+
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = ['Karen', 'Catherine', 'Samantha', 'Moira'];
+  for (const name of preferred) {
+    const match = voices.find(v => v.name.includes(name));
+    if (match) { utt.voice = match; break; }
+  }
+
   if (onEnd) utt.onend = onEnd;
   window.speechSynthesis.speak(utt);
 }
